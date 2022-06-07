@@ -4,14 +4,25 @@ pre-cooked spring web application with Thymeleaf template
 ## Development
 
 ### Prerequisites
-* JDK 11
+* JDK 17
+* Docker-Desktop
+
+### Start the required services e.g. postgres
+```bash
+docker-compose -f docker/docker-compose.yaml up -d
+```
+
+### Stop the required services
+```bash
+docker-compose -f docker/docker-compose.yaml down
+```
 
 ### Compiles, tests and assembles the code into JAR file
 ```bash
-./mvnw clean install
+./gradlew build
 ```
 
 ### Run application
 ```bash
-./mvnw spring-boot:run
+./gradlew bootRun
 ```

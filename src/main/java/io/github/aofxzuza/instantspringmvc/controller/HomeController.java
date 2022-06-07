@@ -1,9 +1,12 @@
 package io.github.aofxzuza.instantspringmvc.controller;
 
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.LockedException;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author rattapong
@@ -11,8 +14,33 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class HomeController {
     @GetMapping("/")
-    public String homePage(@RequestParam(name = "name", required = false, defaultValue = "n/a") String name, Model model) {
-        model.addAttribute("name", name);
+    public String homePage() {
         return "home";
+    }
+
+    @GetMapping("/dashboard")
+    public String dashboardPage() {
+        return "dashboard";
+    }
+
+    @GetMapping("/login")
+    public String login(HttpServletRequest request, HttpSession session) {
+        session.setAttribute(
+                "error", getErrorMessage(request, "SPRING_SECURITY_LAST_EXCEPTION")
+        );
+        return "login";
+    }
+
+    private String getErrorMessage(HttpServletRequest request, String key) {
+        Exception exception = (Exception) request.getSession().getAttribute(key);
+        String error = "";
+        if (exception instanceof BadCredentialsException) {
+            error = "Invalid username and password!";
+        } else if (exception instanceof LockedException) {
+            error = exception.getMessage();
+        } else {
+            error = "Invalid username and password!";
+        }
+        return error;
     }
 }
