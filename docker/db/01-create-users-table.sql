@@ -1,7 +1,7 @@
 CREATE TABLE users (
-   username VARCHAR(45) NOT NULL ,
-   password VARCHAR(45) NOT NULL ,
-   account_non_locked TINYINT NOT NULL DEFAULT 1 ,
+   username VARCHAR(45) NOT NULL,
+   password VARCHAR(45) NOT NULL,
+   account_non_locked BOOL NOT NULL DEFAULT TRUE,
    PRIMARY KEY (username)
 );
 
