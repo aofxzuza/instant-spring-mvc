@@ -1,11 +1,10 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
-    <title>Home</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Welcome! to Instant Spring MVC</title>
 </head>
 <body>
-<h3>Welcome to homepage</h3>
-<p th:text="'Hello, ' + ${name} + '!'"/>
+<h1>Welcome!</h1>
+<p>Click <a th:href="@{/dashboard}">here</a> to see your dashboard.</p>
 </body>
 </html>
